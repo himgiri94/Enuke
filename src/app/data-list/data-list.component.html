@@ -1,0 +1,134 @@
+<div *ngIf="!id && userData">
+  <div class="row detail">
+    <div class="col-sm-2">
+      <span class="title">
+      </span>
+    </div>
+    <div class="col-sm-2">
+      <span class="title">
+        Name
+      </span>
+    </div>
+    <div class="col-sm-2">
+      <span class="title">
+        Phone Number
+      </span>
+    </div>
+    <div class="col-sm-2">
+      <span class="title">
+        Address
+      </span>
+    </div>
+    <div class="col-sm-2">
+      <span class="title">
+        Action
+      </span>
+    </div>
+    <div class="col-sm-2">
+      <span class="title">
+      </span>
+    </div>
+  </div>
+  <div class="row detail" *ngFor="let user of userData; let i = index;">
+    <div class="col-sm-2">
+      <span class="title">
+        {{ user?.id }}
+      </span>
+    </div>
+    <div class="col-sm-2">
+      <span class="title">
+        <a href="" [routerLink]="'/user/'+ user?.id">
+          {{ user?.name }}
+        </a>
+      </span>
+    </div>
+    <div class="col-sm-2">
+      <span class="title">
+        <span class="title" *ngIf="editUserNumber!==i">
+          {{ user?.phone_number }}
+        </span>
+        <span class="title" *ngIf="editUserData && editUserNumber === i">
+          <input type="text" [value]="user?.phone_number" />
+        </span>
+      </span>
+    </div>
+    <div class="col-sm-2">
+      <span class="title">
+        {{ user?.address }}
+      </span>
+    </div>
+    <div class="col-sm-2">
+      <span class="title">
+        <button type="submit" (click)="removeData('data', i)">Delete</button>
+      </span>
+    </div>
+    <div class="col-sm-2">
+      <span class="title">
+        <button type="submit" (click)="editData('data', i)">Edit</button>
+        <button type="submit" (click)="cancel('data')">Cancel</button>
+      </span>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="id && itemData">
+  <div class="text-right">
+    <span>
+      <a href="" [routerLink]="'/user'">
+        Back
+      </a>
+    </span>
+  </div>
+  <div class="row detail">
+    <div class="col-sm-3">
+      <span class="title">
+        Image
+      </span>
+    </div>
+    <div class="col-sm-3">
+      <span class="title">
+        Name
+      </span>
+    </div>
+    <div class="col-sm-3">
+      <span class="title">
+        Action
+      </span>
+    </div>
+    <div class="col-sm-3">
+      <span class="title">
+      </span>
+    </div>
+  </div>
+  <div *ngIf="itemData.length === 0" class="no-item">
+    <span>No item Found</span>
+  </div>
+  <div class="detail" *ngFor="let item of itemData; let i = index;">
+    <div *ngIf="item" class="row">
+      <div class="col-sm-3">
+        <span class="title">
+          <img class="img" src="{{ item.image }}" />
+        </span>
+      </div>
+      <div class="col-sm-3">
+        <span class="title" *ngIf="editItemNumber!==i">
+          {{ item.name }}
+        </span>
+        <span class="title" *ngIf="editItemData && editItemNumber === i">
+          <input type="text" [value]="item.name" />
+        </span>
+      </div>
+      <div class="col-sm-3">
+        <span class="title">
+          <button type="submit" (click)="removeData('item', i)">Delete</button>
+        </span>
+      </div>
+      <div class="col-sm-3">
+        <span class="title">
+          <button type="submit" (click)="editData('item', i)">Edit</button>
+          <button type="submit" (click)="cancel('item')">Cancel</button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
